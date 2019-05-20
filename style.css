@@ -1,0 +1,46 @@
+body {
+    padding: 20px
+}
+
+#tags {
+    display: inline-block;
+    width: 100%
+}
+
+#tag-input {
+    margin-top:5px;
+}
+
+.tag {
+    display: inline !important;
+    border: 1px ;
+    border-radius: 5px;
+    padding:3px;
+    margin: 3px;
+    background-color: blue;
+    color:white
+}
+
+.tag-result  {
+    display:none;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin:5px
+}
+
+.tag-alternative-name {
+    border: 1px solid;
+    border-radius: 5px;
+    display: inline-block;
+    padding:2px;
+    margin: 2px
+}
+
+.underline {
+    text-decoration: underline
+}
+
+.selection-remove {
+    cursor: pointer
+}
