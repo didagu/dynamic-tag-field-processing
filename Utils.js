@@ -35,12 +35,6 @@ class Utils {
         })
     }
 
-    stripHtmlTags(html) {
-        var tmp = document.createElement("div");
-        tmp.innerHTML = html;
-        return tmp.textContent || tmp.innerText;
-    }
-
     createTagResult(tag) {
         const result = document.createElement('div')
         result.className = 'tag-result'
@@ -114,7 +108,4 @@ class Utils {
             this.tags.splice(position, 1)
         }
     }
-    
-
-
 }
