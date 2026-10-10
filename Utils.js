@@ -48,7 +48,7 @@ class Utils {
 
                     let tag_span = document.createElement('span')
                     tag_span.setAttribute("class", "tag")
-                    tag_span.setAttribute("id",index)
+                    tag_span.setAttribute("data-index", index)
                     tag_span.innerHTML = `&nbsp;&nbsp;${tagList[index].Title}`
 
                     let remove_span = document.createElement('span')
