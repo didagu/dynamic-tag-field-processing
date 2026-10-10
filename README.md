@@ -2,7 +2,7 @@
 
 A Stack Overflow–style tag picker written in plain JavaScript (ES6), HTML and CSS. No framework, no build step.
 
-Start typing and matching tags appear under the input, each with its description and alternative names. Click a result to add it as a tag. Click the `x` on a tag to remove it.
+Start typing and matching tags appear under the input, each with its description and alternative names, with the matched text underlined. Click a result (or use the arrow keys and Enter) to add it as a tag. Click the `x` on a tag to remove it. Escape clears the search.
 
 | Stack Overflow (reference) | This project |
 | --- | --- |
@@ -25,18 +25,16 @@ Then go to http://localhost:8000.
 | File | What it does |
 | --- | --- |
 | `taglist.js` | The tag data: six hard-coded sample tags, each with an id, title, description and alternative names |
-| `app.js` | Renders every tag as a hidden result card, then filters the cards on each keystroke |
-| `Utils.js` | Adding and removing selected tags, plus small helpers |
-| `style.css` | Layout for the tags and result cards (on top of Bootstrap 3) |
+| `app.js` | Renders every tag as a hidden result card, filters the cards on each keystroke and handles keyboard input |
+| `Utils.js` | Builds the result cards, highlights matches, moves the active result, and adds or removes selected tags |
+| `style.css` | Layout for the tags and result cards (on top of Bootstrap 3 CSS) |
 
-A tag matches when the search text appears anywhere in its title or in one of its alternative names.
+A tag matches when the search text appears anywhere in its title or in one of its alternative names, ignoring case. Tags you've already picked are left out of the results.
 
 ## Known limitations
 
-- Matching is case-sensitive: `Java` finds nothing, `java` works.
-- Mouse only. There's no arrow-key navigation or Enter to select.
-- Highlighting the matched text in results isn't implemented yet.
 - Tag data is static; there's no API behind it.
+- Descriptions aren't searched, only titles and alternative names.
 
 ## Feedback
 
