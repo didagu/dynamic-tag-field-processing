@@ -20,8 +20,8 @@ document.getElementById('tag-input').addEventListener('input', (e) => {
 
     let string = e.target.value.trim().toLowerCase()
 
-    tagList.forEach((tag) =>{
-        if(string !== '' && (tag.Title.toLowerCase().includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
+    tagList.forEach((tag, index) =>{
+        if(string !== '' && !utils.tags.includes(index) && (tag.Title.toLowerCase().includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
             const result = document.getElementById(tag.Id)
             result.style.display = 'block'
             utils.underlineSearchedString(result, string)

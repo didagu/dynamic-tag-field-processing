@@ -101,9 +101,6 @@ class Utils {
                     this.clearInput()
 
                     this.tags.push(index)
-                } else {
-                    alert('You have already added that tag')
-                    this.clearInput()
                 }
             })
         })
