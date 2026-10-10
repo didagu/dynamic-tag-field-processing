@@ -28,7 +28,7 @@ document.getElementById('tag-input').addEventListener('input', (e) => {
     let string = e.target.value
 
     tagList.forEach((tag) =>{
-        if(string !== '' & (tag.Title.includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
+        if(string !== '' && (tag.Title.includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
             document.getElementById(`${tag.Id}`).style.display = 'block'
             utils.underlineSearchedString(string)
         }
