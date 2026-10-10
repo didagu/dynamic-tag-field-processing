@@ -77,8 +77,10 @@ class Utils {
             Array.prototype.forEach.call(tags, (item)=>{
                 item.addEventListener("click", (e)=>{
                     e.target.parentNode.remove()
-                    const value = e.target.parentNode.attributes[1].nodeValue
-                    this.tags.splice(this.tags.indexOf(value),1)
+                    const position = this.tags.indexOf(Number(e.target.parentNode.dataset.index))
+                    if (position > -1) {
+                        this.tags.splice(position, 1)
+                    }
                 })
             })
         }
