@@ -10,11 +10,52 @@ class Utils {
         Array.prototype.forEach.call(fields, (field) => {
             field.style.display = 'none'
         })
+        this.setActive(null)
+        document.getElementById('tag-input').setAttribute('aria-expanded', 'false')
     }
 
     clearInput() {
-        document.getElementById('tag-input').value=''
+        const input = document.getElementById('tag-input')
+        input.value=''
+        input.focus()
         this.clearFields()
+    }
+
+    visibleResults() {
+        return Array.prototype.filter.call(document.getElementsByClassName('tag-result'), (result) => {
+            return result.style.display === 'block'
+        })
+    }
+
+    moveActive(step) {
+        const results = this.visibleResults()
+        if (results.length === 0) {
+            return
+        }
+
+        const current = results.findIndex((result) => result.classList.contains('active'))
+        const next = current < 0
+            ? (step > 0 ? 0 : results.length - 1)
+            : (current + step + results.length) % results.length
+        this.setActive(results[next])
+    }
+
+    setActive(result) {
+        const input = document.getElementById('tag-input')
+        const previous = document.querySelector('.tag-result.active')
+        if (previous) {
+            previous.classList.remove('active')
+            previous.setAttribute('aria-selected', 'false')
+        }
+
+        if (result) {
+            result.classList.add('active')
+            result.setAttribute('aria-selected', 'true')
+            input.setAttribute('aria-activedescendant', result.id)
+            result.scrollIntoView({ block: 'nearest' })
+        } else {
+            input.removeAttribute('aria-activedescendant')
+        }
     }
 
     underlineSearchedString(result, searched_string){
@@ -39,6 +80,8 @@ class Utils {
         const result = document.createElement('div')
         result.className = 'tag-result'
         result.id = tag.Id
+        result.setAttribute('role', 'option')
+        result.setAttribute('aria-selected', 'false')
 
         const title = document.createElement('span')
         title.className = 'tag-title'
@@ -83,9 +126,11 @@ class Utils {
                     tag_span.setAttribute("data-index", index)
                     tag_span.textContent = `\u00a0\u00a0${tagList[index].Title}`
 
-                    let remove_span = document.createElement('span')
+                    let remove_span = document.createElement('button')
+                    remove_span.setAttribute("type", "button")
                     remove_span.setAttribute("class", "selection-remove")
-                    remove_span.innerText = 'x'
+                    remove_span.setAttribute("aria-label", `Remove ${tagList[index].Title}`)
+                    remove_span.textContent = 'x'
 
                     remove_span.addEventListener("click", () => this.removeTag(tag_span))
 
@@ -103,6 +148,7 @@ class Utils {
 
     removeTag(tag_span) {
         tag_span.remove()
+        document.getElementById('tag-input').focus()
         const position = this.tags.indexOf(Number(tag_span.dataset.index))
         if (position > -1) {
             this.tags.splice(position, 1)

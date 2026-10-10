@@ -27,4 +27,21 @@ document.getElementById('tag-input').addEventListener('input', (e) => {
             utils.underlineSearchedString(result, string)
         }
     })
+
+    e.target.setAttribute('aria-expanded', utils.visibleResults().length > 0)
+})
+
+document.getElementById('tag-input').addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        utils.moveActive(e.key === 'ArrowDown' ? 1 : -1)
+    } else if (e.key === 'Enter') {
+        const active = document.querySelector('.tag-result.active')
+        if (active) {
+            e.preventDefault()
+            active.click()
+        }
+    } else if (e.key === 'Escape') {
+        utils.clearInput()
+    }
 })
