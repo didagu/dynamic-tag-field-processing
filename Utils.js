@@ -33,7 +33,7 @@ class Utils {
 
     contains(arr, value){
         return arr.some((arr_value) => {
-            return arr_value.includes(value)
+            return arr_value.toLowerCase().includes(value)
         })
     }
 

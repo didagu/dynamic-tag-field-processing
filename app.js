@@ -25,10 +25,10 @@ document.getElementById('tag-input').addEventListener('input', (e) => {
        
     utils.clearFields()
 
-    let string = e.target.value
+    let string = e.target.value.trim().toLowerCase()
 
     tagList.forEach((tag) =>{
-        if(string !== '' && (tag.Title.includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
+        if(string !== '' && (tag.Title.toLowerCase().includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
             document.getElementById(`${tag.Id}`).style.display = 'block'
             utils.underlineSearchedString(string)
         }
