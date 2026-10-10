@@ -13,7 +13,6 @@ body {
 
 .tag {
     display: inline !important;
-    border: 1px ;
     border-radius: 5px;
     padding:3px;
     margin: 3px;
@@ -26,7 +25,13 @@ body {
     border: 1px solid;
     border-radius: 5px;
     padding: 5px;
-    margin:5px
+    margin:5px;
+    cursor: pointer
+}
+
+.tag-result:hover,
+.tag-result.active {
+    background-color: #eef3ff
 }
 
 .tag-alternative-name {
@@ -42,5 +47,9 @@ body {
 }
 
 .selection-remove {
-    cursor: pointer
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit
 }
