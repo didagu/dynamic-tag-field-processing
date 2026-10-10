@@ -22,8 +22,9 @@ document.getElementById('tag-input').addEventListener('input', (e) => {
 
     tagList.forEach((tag) =>{
         if(string !== '' && (tag.Title.toLowerCase().includes(string)  || utils.contains(tag.AlternativeNames, string) )) {
-            document.getElementById(`${tag.Id}`).style.display = 'block'
-            utils.underlineSearchedString(string)
+            const result = document.getElementById(tag.Id)
+            result.style.display = 'block'
+            utils.underlineSearchedString(result, string)
         }
     })
 })

@@ -17,11 +17,21 @@ class Utils {
         this.clearFields()
     }
 
-    underlineSearchedString(searched_string){
-        const fields = document.getElementsByClassName("tag-alternative-name")
+    underlineSearchedString(result, searched_string){
+        const fields = result.querySelectorAll('.tag-title, .tag-alternative-name')
 
         Array.prototype.forEach.call(fields, (field) => {
-            // console.log(field)   
+            const text = field.textContent
+            const start = text.toLowerCase().indexOf(searched_string)
+            if (start < 0) {
+                field.textContent = text
+                return
+            }
+
+            const match = document.createElement('span')
+            match.className = 'underline'
+            match.textContent = text.slice(start, start + searched_string.length)
+            field.replaceChildren(text.slice(0, start), match, text.slice(start + searched_string.length))
         })
     }
 
