@@ -2,21 +2,14 @@ const utils = new Utils()
 
 document.addEventListener('DOMContentLoaded', () => {
     const tagDiv = document.querySelector('#tag-results')
+    const fragment = document.createDocumentFragment()
+
     tagList.forEach(element => {
-        const markup = `
-            <div class="tag-result" id="${element.Id}">
-                <b><span class="tag-title">${element.Title}</span></b>
-                <p class="tag-description">${element.Description}</p>
-                <div class="tag-alternative-names">
-                    ${element.AlternativeNames.map(alternative_name => 
-                        `<div class="tag-alternative-name">${alternative_name}</div>`
-                    ).join('')}
-                </div>
-            </div>
-        `
-        tagDiv.innerHTML += markup
-    });
-    
+        fragment.appendChild(utils.createTagResult(element))
+    })
+
+    tagDiv.appendChild(fragment)
+
     utils.attachClickListener()    
 
 })
@@ -34,11 +27,3 @@ document.getElementById('tag-input').addEventListener('input', (e) => {
         }
     })
 })
-
-
-
-
-
-
-
-
