@@ -30,11 +30,11 @@ End-to-end tests use [Playwright](https://playwright.dev) and need Node.js 22 an
 
 ```bash
 npm install
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm test
 ```
 
-CI runs the same suite on every pull request. Merges to `master` deploy to GitHub Pages once the tests pass.
+The suite runs in Chromium, Firefox and WebKit, and includes [axe-core](https://github.com/dequelabs/axe-core) accessibility scans against WCAG 2.1 AA. CI runs it on every pull request. Merges to `master` deploy to GitHub Pages once the tests pass.
 
 ## How it works
 
@@ -44,7 +44,7 @@ CI runs the same suite on every pull request. Merges to `master` deploy to GitHu
 | `app.js` | Renders every tag as a hidden result card, filters the cards on each keystroke and handles keyboard input |
 | `Utils.js` | Builds the result cards, highlights matches, moves the active result, and adds or removes selected tags |
 | `style.css` | Layout for the tags and result cards (on top of Bootstrap 3 CSS) |
-| `tests/` | Playwright tests for search, selection, removal and keyboard use |
+| `tests/` | Playwright tests for search, selection, removal, keyboard use and accessibility |
 
 A tag matches when the search text appears anywhere in its title or in one of its alternative names, ignoring case. Tags you've already picked are left out of the results.
 
@@ -53,6 +53,24 @@ A tag matches when the search text appears anywhere in its title or in one of it
 - Tag data is static; there's no API behind it.
 - Descriptions aren't searched, only titles and alternative names.
 
+## Nice to have
+
+Ideas for where this could go next. None of them are started yet.
+
+- **Reusable `<tag-picker>` web component.** Package the field as a custom element that owns its state and works inside a normal `<form>`, then publish it to npm. This would also replace the `tagList`/`utils` globals and the index-based selection tracking.
+- **Live Stack Overflow tags.** Fetch tags from the Stack Exchange API as you type (debounced, with cancelled stale requests and a cache) and show each tag's question count.
+- **Smarter ranking.** Order results as exact match, then prefix, then substring, then alternative name; tolerate small typos; label synonyms (e.g. "synonym of java-ee").
+- **Stack Overflow-style typing.** Space or comma confirms a tag, Backspace on an empty input removes the last one, and pasting a list adds several tags at once.
+- **Tag limit.** Cap the number of tags (Stack Overflow allows 5) with a clear message when it's reached.
+- **Dropdown results.** Show results in an overlay under the input with a max height and shortened descriptions.
+- **Drop Bootstrap 3 and add dark mode.** Only `.form-control` is used, so plain CSS can replace it.
+- **Preview deploys for pull requests.** Give each PR its own URL to try before merging.
+- **Linting and formatting.** Add a single tool such as Biome to keep the code style consistent.
+
 ## Feedback
 
 Bug reports and suggestions are welcome as [GitHub issues](https://github.com/didagu/tag-picker/issues).
+
+## License
+
+[MIT](LICENSE)
