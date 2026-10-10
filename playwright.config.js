@@ -10,7 +10,9 @@ module.exports = defineConfig({
         trace: 'retain-on-failure'
     },
     projects: [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } }
+        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+        { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+        { name: 'webkit', use: { ...devices['Desktop Safari'] } }
     ],
     webServer: {
         command: 'npm start',
