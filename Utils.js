@@ -55,6 +55,8 @@ class Utils {
                     remove_span.setAttribute("class", "selection-remove")
                     remove_span.innerText = 'x'
 
+                    remove_span.addEventListener("click", () => this.removeTag(tag_span))
+
                     tag_span.insertAdjacentElement('afterbegin', remove_span)
 
                     tags.appendChild(tag_span)
@@ -64,25 +66,17 @@ class Utils {
                 } else {
                     alert('You have already added that tag')
                     this.clearInput()
-                }     
-                this.AddRemoveTagClickListener()
-            })            
+                }
+            })
         })
-        
+
     }
 
-    AddRemoveTagClickListener() {
-        const tags = document.getElementsByClassName('selection-remove')
-        if (tags.length > 0) {
-            Array.prototype.forEach.call(tags, (item)=>{
-                item.addEventListener("click", (e)=>{
-                    e.target.parentNode.remove()
-                    const position = this.tags.indexOf(Number(e.target.parentNode.dataset.index))
-                    if (position > -1) {
-                        this.tags.splice(position, 1)
-                    }
-                })
-            })
+    removeTag(tag_span) {
+        tag_span.remove()
+        const position = this.tags.indexOf(Number(tag_span.dataset.index))
+        if (position > -1) {
+            this.tags.splice(position, 1)
         }
     }
     
