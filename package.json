@@ -1,5 +1,5 @@
 {
-  "name": "dynamic-tag-field-processing",
+  "name": "tag-picker",
   "private": true,
   "description": "A Stack Overflow-style tag picker in plain JavaScript",
   "scripts": {
